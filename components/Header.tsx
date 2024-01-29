@@ -12,6 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { Fragment, useState } from 'react';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
+import { cn } from '@/lib/utils';
 function Header() {
   const [mobMenuOpen, setMobMenuOpen] = useState(false);
   const products = [
@@ -199,6 +200,50 @@ function Header() {
           <div className='mt-6 flow-root'>
             <div className='-my-6 divide-y divide-gray-500/10'>
               <div className='space-y-2 py-6'>
+                <Disclosure as='div' className='-mx-3'>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className='flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-white hover:bg-green-400'>
+                        Stays
+                        <ChevronDownIcon
+                          className={cn(
+                            open ? 'rotate-180' : '',
+                            'h-5 w-5 flex-none text-white'
+                          )}
+                        />
+                      </Disclosure.Button>
+                      <Disclosure.Panel className='mt-2 space-y-2'>
+                        {[...products, ...callToAction].map((item) => (
+                          <Disclosure.Button
+                            as='a'
+                            key={item.name}
+                            href={item.href}
+                            className='block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-green-400'
+                          >
+                            {item.name}
+                          </Disclosure.Button>
+                        ))}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+                <a href='#' className='mobile-link'>
+                  Flights
+                </a>
+                <a href='#' className='mobile-link'>
+                  Car Rentals
+                </a>
+                <a href='#' className='mobile-link'>
+                  Attractions
+                </a>
+                <a href='#' className='mobile-link'>
+                  Flight + Hotel
+                </a>
+              </div>
+              <div className='py-6'>
+                <a href='#' className='mobile-link'>
+                  Log In
+                </a>
               </div>
             </div>
           </div>
