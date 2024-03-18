@@ -54,7 +54,32 @@ function SearchForm() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {};
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    const checkin_monthday = values.dates.from.getDate().toString();
+    const checkin_month = (values.dates.from.getMonth() + 1).toString();
+    const checkin_year = values.dates.from.getFullYear().toString();
+    const checkout_monthday = values.dates.to?.getDate().toString();
+    const checkout_month = (values.dates.to?.getMonth() + 1).toString();
+    const checkout_year = values.dates.to?.getFullYear().toString();
+    const adults = values.adults;
+    const children = values.children;
+    const rooms = values.rooms;
+    const location = values.location;
+
+    const checkin = `${checkin_year}-${checkin_month}-${checkin_monthday}`;
+    const checkout = `${checkout_year}-${checkout_month}-${checkout_monthday}`;
+
+    const url = new URL('https://booking.com/searchresults.html');
+    url.searchParams.set('ss', location);
+    url.searchParams.set("group_adults", adults);
+    url.searchParams.set("group_children", children);
+    url.searchParams.set("no_rooms", rooms);
+    url.searchParams.set("checkin", checkin);
+    url.searchParams.set("checkout", checkout);
+
+    router.push(`/search?url=${url.href}`);
+
+  };
   return (
     <Form {...form}>
       <form
