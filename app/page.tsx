@@ -11,7 +11,7 @@ export default function Home() {
             Search for hotels, flights, and more...
           </h3>
         </section>
-        <section className='m-4 mt-0-mb-14 px-2 lg:px-3'>
+        <section className='m-4 mt-0 -mb-14 px-2 lg:px-3'>
           <SearchForm />
         </section>
 
